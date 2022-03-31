@@ -14,7 +14,6 @@ import java.util.Set;
 @Table(name = "users")
 public class User implements UserDetails {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -33,10 +32,7 @@ public class User implements UserDetails {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "users_roles",joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     public User(long id, String firstname, String lastname, String email, String password, Set<Role> roles) {
@@ -49,7 +45,6 @@ public class User implements UserDetails {
     }
 
     public User() {
-
     }
 
     @Override
@@ -59,30 +54,13 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return getPassword();
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return getEmail();
     }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
 
     @Override
     public boolean isAccountNonExpired() {
@@ -101,7 +79,23 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isEnabled();
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getLastname() {
+        return lastname;
     }
 
     public long getId() {
