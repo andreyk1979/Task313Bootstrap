@@ -54,12 +54,12 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return getPassword();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return getEmail();
+        return email;
     }
 
     @Override
@@ -79,7 +79,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return isEnabled();
+        return true;
     }
 
     public String getFirstname() {
@@ -120,6 +120,10 @@ public class User implements UserDetails {
 
     public Set<Role> getRoles() {
         return roles;
+    }
+
+    public String getFullName() {
+        return getFirstname() + " " + getLastname();
     }
 
     public void setRoles(Set<Role> roles) {

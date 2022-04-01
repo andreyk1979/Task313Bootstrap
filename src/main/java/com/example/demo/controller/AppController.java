@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
@@ -65,12 +63,27 @@ public class AppController {
 
     @GetMapping("/users")
     public String listUsers(Model model) {
-        List<User> listUsers = userRepo.findAll();
+        List<User> listUsers = userService.getAllUsers();
         model.addAttribute("listUsers", listUsers);
 
         return "users";
     }
 
 
+    @GetMapping("/users/edit/{id}")
+    public String editUser(@PathVariable("id") Long id, Model model) {
+        User user = userService.getById(id);
+        List<Role> listRoles = roleService.getAllRoles();
+        model.addAttribute("user", user);
+        model.addAttribute("listRoles", listRoles);
+        return "user_form";
+    }
 
-}
+    @PostMapping("/users/save")
+    public String saveUser(User user) {
+        userService.save(user);
+
+        return "redirect:/users";
+    }
+
+    }

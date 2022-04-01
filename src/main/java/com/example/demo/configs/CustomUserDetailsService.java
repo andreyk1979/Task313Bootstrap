@@ -1,3 +1,4 @@
+/*
 package com.example.demo.configs;
 
 import com.example.demo.repository.UserRepository;
@@ -21,4 +22,4 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new CustomUserDetails(user);
     }
 
-}
+}*/

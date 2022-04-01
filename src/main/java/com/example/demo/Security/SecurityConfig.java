@@ -15,8 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private SuccessUserHandler successUserHandler; // класс, в котором описана логика перенаправления пользователей по ролям
+  /*  @Autowired
+    private SuccessUserHandler successUserHandler; // класс, в котором описана логика перенаправления пользователей по ролям*/
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -38,16 +38,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()// перехватчик URL
-                .antMatchers("/", "/user").hasAnyRole("ADMIN", "USER")
-                .antMatchers("/**").hasRole("ADMIN")
+//                .antMatchers("/index").permitAll()
+//                .antMatchers("/", "/user").hasAnyRole("ADMIN", "USER")
+//                .antMatchers("/**").hasRole("ADMIN")
+//                .and()
+//                .formLogin() // Spring сам подставит свою логин форму
+//                .successHandler(new SuccessUserHandler()) // подключаем наш SuccessHandler для перенеправления по ролям
+//                .and()
+//                .logout().logoutSuccessUrl("/login")// и без него перенаправляет на регистрацию после выхода
+//                .and()
+//                .csrf()
+//                .disable();
+
+                .antMatchers("/users").authenticated()
+                .anyRequest().permitAll()
                 .and()
-                .formLogin() // Spring сам подставит свою логин форму
-                .successHandler(new SuccessUserHandler()) // подключаем наш SuccessHandler для перенеправления по ролям
+                .formLogin()
+                .usernameParameter("email")
+                .defaultSuccessUrl("/users")
+                .permitAll()
                 .and()
-                .logout().logoutSuccessUrl("/login")// и без него перенаправляет на регистрацию после выхода
-                .and()
-                .csrf()
-                .disable();
+                .logout().logoutSuccessUrl("/").permitAll();
     }
 
     // Необходимо для шифрования паролей

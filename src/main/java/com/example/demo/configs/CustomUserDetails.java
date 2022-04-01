@@ -1,3 +1,4 @@
+/*
 package com.example.demo.configs;
 
 import java.util.Collection;
@@ -54,3 +55,4 @@ public class CustomUserDetails implements UserDetails {
     }
 
 }
+*/

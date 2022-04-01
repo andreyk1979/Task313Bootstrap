@@ -41,14 +41,14 @@ public class UserService implements UserDetailsService {
 
 
     public   User getUserByUserName(String email){
-         return  userRepository.getUserByByEmail(email);
+         return  userRepository.getUserByEmail(email);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = getUserByUserName(email);
-        if (user==null) throw new UsernameNotFoundException("Нет такого "+ email);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = getUserByUserName(username);
+        if (user==null) throw new UsernameNotFoundException("Нет такого "+ username);
         return  user ;
     }
 }

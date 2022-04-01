@@ -1,3 +1,4 @@
+/*
 package com.example.demo.configs;
 
 import com.example.demo.DemoApplication;
@@ -12,3 +13,4 @@ public class ServletInitializer extends SpringBootServletInitializer {
     }
 
 }
+*/
