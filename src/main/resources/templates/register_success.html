@@ -1,16 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="ISO-8859-1">
     <title>Registration Success</title>
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <style type="text/css">
+        span {
+            display: inline-block;
+            width: 200px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-<div class="container text-center">
-    <h3>You have signed up successfully!</h3>
-<!--    <h4><a th:href="@{/login}">Click here to Login</a></h4>-->
-    <h4><a th:href="@{/admin/users}">List of Users</a></h4>
+<div align="center">
+    <h2>Registration Succeeded!</h2>
+    <span>Registration ID:</span><span th:text="${user.id}"></span><br/>
+    <span>First name:</span><span th:text="${user.firstname}"></span><br/>
+    <span>Last name:</span><span th:text="${user.lastname}"></span><br/>
+    <span>E-mail:</span><span th:text="${user.email}"></span><br/>
+    <span>Password:</span><span th:text="${user.password}"></span><br/>
+    <span>Your role:</span><span th:text="${user.roles}"></span><br/>
+    <h4><a th:href="@{/login}">Click here to Login</a></h4>
 </div>
-
 </body>
 </html>

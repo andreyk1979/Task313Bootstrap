@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -8,9 +8,42 @@
 <body>
 <div class="container text-center">
     <h3>You have signed up successfully!</h3>
-<!--    <h4><a th:href="@{/login}">Click here to Login</a></h4>-->
+&lt;!&ndash;    <h4><a th:href="@{/login}">Click here to Login</a></h4>&ndash;&gt;
     <h4><a th:href="@{/admin/users}">List of Users</a></h4>
 </div>
 
+</body>
+</html>-->
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Registration Success</title>
+    <style type="text/css">
+        span {
+            display: inline-block;
+            width: 200px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<div align="center">
+    <h2>Registration Succeeded!</h2>
+    <span>Registration ID:</span><span th:text="${user.id}"></span><br/>
+    <span>First name:</span><span th:text="${user.firstname}"></span><br/>
+    <span>Last name:</span><span th:text="${user.lastname}"></span><br/>
+    <span>E-mail:</span><span th:text="${user.email}"></span><br/>
+    <span>Password:</span><span th:text="${user.password}"></span><br/>
+    <span>Your role:</span><span th:text="${user.roles}"></span><br/>
+    <h4><a th:href="@{/login}">Click here to Login</a></h4>
+    <!--    <span>Gender:</span><span th:text="${user.gender}"></span><br/>-->
+<!--    <span>Profession:</span><span th:text="${user.profession}"></span><br/>-->
+<!--    <span>Married?</span><span th:text="${user.married}"></span><br/>-->
+<!--    <span>Note:</span><span th:text="${user.note}"></span><br/>-->
+</div>
 </body>
 </html>
