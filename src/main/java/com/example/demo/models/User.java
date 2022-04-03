@@ -20,19 +20,27 @@ public class User implements UserDetails {
     private long id;
 
 
-    @Column(name = "first_name",unique = true)
+    @Column(name = "first_name")
     private String firstname;
     @Column(name = "last_name")
     private String lastname;
-    @Column(name = "email",unique = true)
+    @Column(name = "email", unique = true)
     private String email;
     @Column(name = "password")
     private String password;
 
+    public User(String firstname, String lastname, String email, String password, Set<Role> roles) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
 
     @ManyToMany(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
-    @JoinTable(name = "users_roles",joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "users_roles",joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     public User(long id, String firstname, String lastname, String email, String password, Set<Role> roles) {

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -18,8 +19,8 @@ public class RoleService {
     RoleRepository roleRepository;
 
 
-    public List<Role> getAllRoles() {
-        return roleRepository.findAll();
+    public Set<Role> getAllRoles() {
+        return  new HashSet<>(roleRepository.findAll());
     }
 
     public void add(Role role) {

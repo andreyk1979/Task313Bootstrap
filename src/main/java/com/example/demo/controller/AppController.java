@@ -6,26 +6,25 @@ import com.example.demo.models.Role;
 import com.example.demo.models.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
 
 @Controller
+@RequestMapping("/admin")
 public class AppController {
-
-    @Autowired
-    private UserRepository userRepo;
-
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     private final UserService userService;
     private final RoleService roleService;
+
+/*    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;*/
+
+    @Autowired
+    private UserRepository userRepo;
 
     @Autowired
     public AppController(UserService userService, RoleService roleService) {
@@ -50,14 +49,10 @@ public class AppController {
                                   @RequestParam(value = "roless",
                                           required = false,
                                           defaultValue = "ROLE_USER") Set<String> roles) {
-
         Set<Role> setRoles = roleService.getSetRoles(roles);
         user.setRoles(setRoles);
-
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-
-        userRepo.save(user);
-
+        //user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userService.save(user);
         return "register_success";
     }
 
@@ -65,15 +60,13 @@ public class AppController {
     public String listUsers(Model model) {
         List<User> listUsers = userService.getAllUsers();
         model.addAttribute("listUsers", listUsers);
-
-        return "users";
+        return "/users";
     }
-
 
     @GetMapping("/users/edit/{id}")
     public String editUser(@PathVariable("id") Long id, Model model) {
         User user = userService.getById(id);
-        List<Role> listRoles = roleService.getAllRoles();
+        Set<Role> listRoles = roleService.getAllRoles();
         model.addAttribute("user", user);
         model.addAttribute("listRoles", listRoles);
         return "user_form";
@@ -81,9 +74,16 @@ public class AppController {
 
     @PostMapping("/users/save")
     public String saveUser(User user) {
+     //   user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userService.save(user);
-
-        return "redirect:/users";
+        return "redirect:/admin/users";
     }
 
+    @GetMapping(value = "/users/delete/{id}")
+    public String deleteUser(@PathVariable("id") long id) {
+        User user = userService.getById(id);
+        userService.delete(user);
+        return "redirect:/admin/users";
     }
+
+}

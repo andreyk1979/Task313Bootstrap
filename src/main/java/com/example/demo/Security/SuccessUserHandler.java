@@ -1,4 +1,3 @@
-/*
 package com.example.demo.Security;
 
 import org.springframework.security.core.Authentication;
@@ -19,10 +18,9 @@ public class SuccessUserHandler implements AuthenticationSuccessHandler {
                                         Authentication authentication) throws IOException {
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
         if (roles.contains("ROLE_ADMIN")) {
-            httpServletResponse.sendRedirect("/index");
+            httpServletResponse.sendRedirect("/admin");
         } else if (roles.contains("ROLE_USER")) {
-            httpServletResponse.sendRedirect("/user");
+            httpServletResponse.sendRedirect("/users");
         }
     }
 }
-*/
