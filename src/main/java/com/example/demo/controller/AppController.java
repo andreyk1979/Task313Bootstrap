@@ -20,9 +20,6 @@ public class AppController {
     private final UserService userService;
     private final RoleService roleService;
 
-/*    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;*/
-
     @Autowired
     private UserRepository userRepo;
 
@@ -51,7 +48,6 @@ public class AppController {
                                           defaultValue = "ROLE_USER") Set<String> roles) {
         Set<Role> setRoles = roleService.getSetRoles(roles);
         user.setRoles(setRoles);
-        //user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userService.save(user);
         return "register_success";
     }
@@ -74,7 +70,6 @@ public class AppController {
 
     @PostMapping("/users/save")
     public String saveUser(User user) {
-     //   user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userService.save(user);
         return "redirect:/admin/users";
     }
