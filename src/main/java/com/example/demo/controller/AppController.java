@@ -21,9 +21,6 @@ public class AppController {
     private final RoleService roleService;
 
     @Autowired
-    private UserRepository userRepo;
-
-    @Autowired
     public AppController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
