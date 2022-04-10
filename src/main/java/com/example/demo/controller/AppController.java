@@ -28,12 +28,12 @@ public class AppController {
 
     @GetMapping("")
     public String viewHomePage() {
-        return "index";
+        return "redirect:/admin/users";
     }
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute( "user", new User()); // создаем объект класса User с его полями
         model.addAttribute("roles", roleService.getAllRoles());
         return "signup_form";
     }

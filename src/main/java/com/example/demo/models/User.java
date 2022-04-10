@@ -58,17 +58,17 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
-    }
+    } //права доступа
 
     @Override
     public String getPassword() {
         return password;
-    }
+    }//пароль использует UserDetails
 
     @Override
     public String getUsername() {
         return email;
-    }
+    }//имя пользователя в БД использует UserDetails
 
     @Override
     public boolean isAccountNonExpired() {

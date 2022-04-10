@@ -13,15 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
+@Service //задача этого сервиса - по имени пользователся предоставить самого юзера
 public class UserService implements UserDetailsService {
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
-
+/*    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;*/
 
     @Autowired
     UserRepository userRepository;
-
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -51,7 +49,7 @@ public class UserService implements UserDetailsService {
 
     @Override
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { //djpdhfotn
         User user = getUserByUserName(username);
         if (user == null) throw new UsernameNotFoundException("Нет такого " + username);
         return user;
