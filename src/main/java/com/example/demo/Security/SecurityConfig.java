@@ -27,18 +27,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    @Bean //https://www.youtube.com/watch?v=HvovW6Uh1yU "Как устроен Spring Security" - 31.05.20 1:08:00
-    public static BCryptPasswordEncoder passwordEncoder() { //преобразователь паролей вбиваемых в форму, для дальнейшего сравнения пароля, хранеящегося в БД
+    @Bean
+    public static BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider() { // при получении логинаи пароля с формы - задача этого
-        //этого провайдера сказать, существует ли такой пользователь или не существует.
-        //и если существет, то его надо положить в SpringSecurity COntext
+    public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setPasswordEncoder(passwordEncoder()); //использует преобразователь паролей (см выше) для дальнейшего сравнения пароля, хранеящегося в БД
-        authProvider.setUserDetailsService(userDetailsService); //предоставляет User_ов из БД для сравнения с вбитыми из вэб формы
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
 
@@ -50,11 +48,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()//
-                .antMatchers("/user/**", "/webjars/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/user/**", "/login", "/webjars/**").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/**").hasRole("ADMIN")
                 .and()
-                .formLogin()
-                .usernameParameter("email")
+                .formLogin().loginPage("/login").permitAll()
                 .successHandler(successUserHandler)
                 .and()
                 .logout().logoutSuccessUrl("/")
