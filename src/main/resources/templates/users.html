@@ -8,16 +8,24 @@
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
+<nav class="navbar navbar-dark bg-dark shadow mb-2">
+    <p>
+        <b>[[${#request.userPrincipal.principal.email}]]</b> with roles:
+        <b>[[${#request.userPrincipal.principal.roles}]]</b>
+    </p>
+    <span>
+    <span class="navbar-brand font-weight-bold" id="navBarInfo"></span>
+    <span class="navbar-bran font-weight-bold text-white"></span>
+    </span>
+
+    <ul class="nav navbar-nav navbar-dark navbar-right sticky-top">
+        <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+        </li>
+    </ul>
+</nav>
+
 <div class="container text-center">
-    <div>
-        <form th:action="@{/logout}" method="post">
-            <p>
-                Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
-            </p>
-            <input type="submit" value="Sign Out" />
-        </form>
-    </div>
-    <br>
     <div>
         <form th:action="@{/admin/register}">
             <input type="submit" value="Register new User or Admin" />
