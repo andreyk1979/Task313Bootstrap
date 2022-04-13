@@ -33,10 +33,7 @@
 
 
 <nav class="navbar navbar-dark bg-dark shadow mb-2">
-    <p  class="text-light bg-dark">
-        <b>[[${#request.userPrincipal.principal.email}]]</b> with roles:
-        <b>[[${#request.userPrincipal.principal.roles}]]</b>
-    </p>
+
     <span>
     <span class="navbar-brand font-weight-bold" id="navBarInfo"></span>
     <span class="navbar-bran font-weight-bold text-white"></span>
@@ -48,43 +45,39 @@
         </li>
     </ul>
 </nav>
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-2 px-0 side">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a href="/api/incomingUser" class="nav-link active">AboutUser123123</a>
+                </li>
+            </ul>
+        </nav>
 
-<div class="container text-center">
-<!--    <div>-->
-<!--        <form th:action="@{/admin/register}">-->
-<!--            <input type="submit" value="Register new User or Admin" />-->
-<!--        </form>-->
-<!--    </div>-->
-    <div>
-        <h1>List of Users</h1>
-    </div>
+        <div class="container bg-light secondary col-sm-10 vh-100">
+            <br>
+            <h1 class="card-title">User information-page</h1>
 
-    <div>
-        <table class="table table-striped table-bordered">
-            <thead class="thead-dark">
-            <tr>
-                <th>User ID</th>
-                <th>E-mail</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Roles</th>
-                <th></th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="user: ${listUsers}">
-                <td th:text="${user.id}">User ID</td>
-                <td th:text="${user.email}">E-mail</td>
-                <td th:text="${user.firstname}">First Name</td>
-                <td th:text="${user.lastname}">Last Name</td>
-                <td th:text="${user.roles}">Roles</td>
-                <td><a th:href="@{'/admin/users/edit/' + ${user.id}}">Edit</a></td>
-                <td><a th:href="@{'/admin/users/delete/' + ${user.id}}">DELETE</a></td>
-            </tr>
-            </tbody>
-        </table>
+            <h5 class="card-header">About User</h5>
+            <div class="bg-white p-3">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">FirstName</th>
+                        <th scope="col">LastName</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Role</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tableAthenticationUser"></tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
+
 </body>
 </html>
