@@ -12,7 +12,7 @@
     <div>
         <form th:action="@{/logout}" method="post">
             <p>
-                Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+                Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>-->
             </p>
             <input type="submit" value="Sign Out" />
         </form>
@@ -29,6 +29,7 @@
             </tr>
             </thead>
             <tbody>
+            <br>
             <tr>
                 <td th:text="${user.id}">User ID</td>
                 <td th:text="${user.email}">E-mail</td>
