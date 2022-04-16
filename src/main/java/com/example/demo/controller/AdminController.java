@@ -25,11 +25,17 @@ public class AdminController {
         this.userService = userService;
         this.roleService = roleService;
     }
-
+/*
     @GetMapping("")
     public String viewHomePage() {
         return "redirect:/admin/users";
+    }*/
+
+    @GetMapping("")
+    public String viewHomePage() {
+        return "testadmin";
     }
+
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
