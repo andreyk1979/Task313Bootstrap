@@ -19,29 +19,6 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private long id;
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", roles=" + roles +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return Objects.equals(getFirstname(), user.getFirstname()) && Objects.equals(getLastname(), user.getLastname()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getRoles(), user.getRoles());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getFirstname(), getLastname(), getEmail(), getRoles());
-    }
-
     @Column(name = "first_name")
     private String firstname;
     @Column(name = "last_name")
@@ -50,13 +27,16 @@ public class User implements UserDetails {
     private String email;
     @Column(name = "password")
     private String password;
+    @Column(name = "age")
+    private int age;
 
-    public User(String firstname, String lastname, String email, String password, Set<Role> roles) {
+    public User(String firstname, String lastname, int age, String email, String password, Set<Role> roles) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.age = age;
     }
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -65,13 +45,15 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    public User(long id, String firstname, String lastname, String email, String password, Set<Role> roles) {
+
+    public User(long id, String firstname, String lastname, int age, String email, String password, Set<Role> roles) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.age = age;
     }
 
     public User() {
@@ -147,6 +129,13 @@ public class User implements UserDetails {
     public void setPassword(String password) {
         this.password = password;
     }
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public Set<Role> getRoles() {
         return roles;
@@ -159,4 +148,5 @@ public class User implements UserDetails {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
 }

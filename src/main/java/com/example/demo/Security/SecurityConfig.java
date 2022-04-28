@@ -2,6 +2,7 @@ package com.example.demo.Security;
 
 import com.example.demo.Service.RoleService;
 import com.example.demo.Service.UserService;
+import com.example.demo.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import javax.annotation.PostConstruct;
 
 
 @Configuration
@@ -58,13 +61,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()
                 .disable();
-
-/*    @PostConstruct
+    }
+/*
+    @PostConstruct
     private void postConstruct() {
-        User admin = new User("andr", "andr1000", "andrey@mail.ru", "100",
+        User admin = new User("Andrey", "Kuimov", 43, "kuimow@mail.ru", "123456",
                 roleService.getAllRoles());
         userService.save(admin);
     }*/
-    }
+
 
 }

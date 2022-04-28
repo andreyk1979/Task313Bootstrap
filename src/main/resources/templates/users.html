@@ -33,7 +33,7 @@
 
 
 <nav class="navbar navbar-dark bg-dark shadow mb-2">
-    <p  class="text-light bg-dark">
+    <p class="text-light bg-dark">
         <b>[[${#request.userPrincipal.principal.email}]]</b> with roles:
         <b>[[${#request.userPrincipal.principal.roles}]]</b>
     </p>
@@ -50,11 +50,11 @@
 </nav>
 
 <div class="container text-center">
-<!--    <div>-->
-<!--        <form th:action="@{/admin/register}">-->
-<!--            <input type="submit" value="Register new User or Admin" />-->
-<!--        </form>-->
-<!--    </div>-->
+    <!--    <div>-->
+    <!--        <form th:action="@{/admin/register}">-->
+    <!--            <input type="submit" value="Register new User or Admin" />-->
+    <!--        </form>-->
+    <!--    </div>-->
     <div>
         <h1>List of Users</h1>
     </div>
@@ -64,20 +64,22 @@
             <thead class="thead-dark">
             <tr>
                 <th>User ID</th>
-                <th>E-mail</th>
                 <th>First Name</th>
                 <th>Last Name</th>
+                <th>Age</th>
+                <th>E-mail</th>
                 <th>Roles</th>
-                <th></th>
-                <th></th>
+                <th>Edit</th>
+                <th>DELETE</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="user: ${listUsers}">
                 <td th:text="${user.id}">User ID</td>
-                <td th:text="${user.email}">E-mail</td>
                 <td th:text="${user.firstname}">First Name</td>
                 <td th:text="${user.lastname}">Last Name</td>
+                <td th:text="${user.age}">Age</td>
+                <td th:text="${user.email}">E-mail</td>
                 <td th:text="${user.roles}">Roles</td>
                 <td><a th:href="@{'/admin/users/edit/' + ${user.id}}">Edit</a></td>
                 <td><a th:href="@{'/admin/users/delete/' + ${user.id}}">DELETE</a></td>

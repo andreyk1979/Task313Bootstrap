@@ -6,8 +6,10 @@ import com.example.demo.models.Role;
 import com.example.demo.models.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,21 +27,23 @@ public class AdminController {
         this.userService = userService;
         this.roleService = roleService;
     }
-/*
     @GetMapping("")
     public String viewHomePage() {
-        return "redirect:/admin/users";
-    }*/
-
-    @GetMapping("")
-    public String viewHomePage() {
-        return "testadmin";
+        return "/index";
     }
 
 
+/*    @GetMapping("")
+    public String listUser(ModelMap modelMap, @AuthenticationPrincipal User user) {
+        modelMap.addAttribute("list", userService.getAllUsers());
+        modelMap.addAttribute("roles", roleService.getAllRoles());
+        modelMap.addAttribute("user", user);
+        return "testadmin";
+    }*/
+
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
-        model.addAttribute( "user", new User()); // создаем объект класса User с его полями
+        model.addAttribute("user", new User()); // создаем объект класса User с его полями
         model.addAttribute("roles", roleService.getAllRoles());
         return "signup_form";
     }
