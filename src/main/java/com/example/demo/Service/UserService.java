@@ -42,16 +42,22 @@ public class UserService implements UserDetailsService {
         return userRepository.getById(id);
     }
 
-
+/*
     public User getUserByUserName(String email) {
+        return userRepository.getUserByEmail(email);
+    }*/
+
+
+    public User getUserByEmail(String email) {
         return userRepository.getUserByEmail(email);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { //djpdhfotn
-        User user = getUserByUserName(username);
-        if (user == null) throw new UsernameNotFoundException("Нет такого " + username);
+    public UserDetails loadUserByUsername(String emailAddress) throws UsernameNotFoundException { //djpdhfotn
+        User user = getUserByEmail(emailAddress);
+        if (user == null) throw new UsernameNotFoundException("Нет такого " + emailAddress);
         return user;
     }
+
 }

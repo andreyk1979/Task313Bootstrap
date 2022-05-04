@@ -10,11 +10,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+/*public class UserController {
     @GetMapping("")
     public String infoUser(@AuthenticationPrincipal User user, ModelMap model) {
         model.addAttribute("user", user);
         model.addAttribute("roles", user.getRoles());
         return "user_page";
     }
+}*/
+
+public class UserController {
+    @GetMapping("")
+    public String infoUser(@AuthenticationPrincipal User user, ModelMap model) {
+        model.addAttribute("user", user);
+        model.addAttribute("roles", user.getRoles());
+        return "userpage";
+    }
 }
+

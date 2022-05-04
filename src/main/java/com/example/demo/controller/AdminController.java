@@ -4,9 +4,9 @@ import com.example.demo.Service.RoleService;
 import com.example.demo.Service.UserService;
 import com.example.demo.models.Role;
 import com.example.demo.models.User;
-import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -19,6 +19,9 @@ import java.util.Set;
 @RequestMapping("/admin")
 public class AdminController {
 
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
     private final UserService userService;
     private final RoleService roleService;
 
@@ -27,19 +30,19 @@ public class AdminController {
         this.userService = userService;
         this.roleService = roleService;
     }
-    @GetMapping("")
+/*    @GetMapping("")
     public String viewHomePage() {
         return "/index";
-    }
+    }*/
 
 
-/*    @GetMapping("")
+    @GetMapping("")
     public String listUser(ModelMap modelMap, @AuthenticationPrincipal User user) {
         modelMap.addAttribute("list", userService.getAllUsers());
         modelMap.addAttribute("roles", roleService.getAllRoles());
         modelMap.addAttribute("user", user);
-        return "testadmin";
-    }*/
+        return "adminpage";
+    }
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -75,13 +78,21 @@ public class AdminController {
         return "user_form";
     }
 
+/*    @PostMapping(value = "/users/edit/{id}")
+    public String editUser(@ModelAttribute User user,
+                           @RequestParam(value = "roless") Set<String> roles) {
+        user.setRoles(roleService.getSetRoles(roles));
+        userService.save(user);
+        return "user_form";
+    }*/
+
     @PostMapping("/users/save")
-    public String saveUser(User user) {
+    public String saveUser(User user, Model model) {
         userService.save(user);
         return "redirect:/admin/users";
     }
 
-    @GetMapping(value = "/users/delete/{id}")
+    @PostMapping(value = "/users/delete/{id}")
     public String deleteUser(@PathVariable("id") long id) {
         User user = userService.getById(id);
         userService.delete(user);

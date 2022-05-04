@@ -29,6 +29,11 @@ public class User implements UserDetails {
     private String password;
     @Column(name = "age")
     private int age;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     public User(String firstname, String lastname, int age, String email, String password, Set<Role> roles) {
         this.firstname = firstname;
@@ -38,12 +43,6 @@ public class User implements UserDetails {
         this.roles = roles;
         this.age = age;
     }
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @Fetch(FetchMode.JOIN)
-    @JoinTable(name = "users_roles",joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
 
 
     public User(long id, String firstname, String lastname, int age, String email, String password, Set<Role> roles) {
@@ -68,6 +67,10 @@ public class User implements UserDetails {
     public String getPassword() {
         return password;
     }//пароль использует UserDetails
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     @Override
     public String getUsername() {
@@ -102,12 +105,12 @@ public class User implements UserDetails {
         this.firstname = firstname;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
     public String getLastname() {
         return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public long getId() {
@@ -126,9 +129,6 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
     public int getAge() {
         return age;
     }
@@ -141,12 +141,12 @@ public class User implements UserDetails {
         return roles;
     }
 
-    public String getFullName() {
-        return getFirstname() + " " + getLastname();
-    }
-
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getFullName() {
+        return getFirstname() + " " + getLastname();
     }
 
 }
