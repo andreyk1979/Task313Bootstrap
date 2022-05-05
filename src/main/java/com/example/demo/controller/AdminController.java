@@ -19,9 +19,6 @@ import java.util.Set;
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
-
     private final UserService userService;
     private final RoleService roleService;
 
@@ -30,73 +27,37 @@ public class AdminController {
         this.userService = userService;
         this.roleService = roleService;
     }
-/*    @GetMapping("")
-    public String viewHomePage() {
-        return "/index";
-    }*/
-
 
     @GetMapping("")
     public String listUser(ModelMap modelMap, @AuthenticationPrincipal User user) {
         modelMap.addAttribute("list", userService.getAllUsers());
         modelMap.addAttribute("roles", roleService.getAllRoles());
         modelMap.addAttribute("user", user);
-        return "adminpage";
+        return "/adminPage";
     }
 
-    @GetMapping("/register")
-    public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new User()); // создаем объект класса User с его полями
-        model.addAttribute("roles", roleService.getAllRoles());
-        return "signup_form";
+    @GetMapping("/user")
+    public String infoUser(@AuthenticationPrincipal User user, ModelMap model) {
+        model.addAttribute("user", user);
+        model.addAttribute("roles", user.getRoles());
+        return "/adminUserPage";
     }
 
-    @PostMapping("/process_register")
+    @PostMapping("/save")
     public String processRegister(@ModelAttribute User user,
                                   @RequestParam(value = "roless",
                                           required = false,
-                                          defaultValue = "ROLE_USER") Set<String> roles) {
+                                          defaultValue = "USER") Set<String> roles) {
         Set<Role> setRoles = roleService.getSetRoles(roles);
         user.setRoles(setRoles);
         userService.save(user);
-        return "register_success";
-    }
-
-    @GetMapping("/users")
-    public String listUsers(Model model) {
-        List<User> listUsers = userService.getAllUsers();
-        model.addAttribute("listUsers", listUsers);
-        return "/users";
-    }
-
-    @GetMapping("/users/edit/{id}")
-    public String editUser(@PathVariable("id") Long id, Model model) {
-        User user = userService.getById(id);
-        Set<Role> listRoles = roleService.getAllRoles();
-        model.addAttribute("user", user);
-        model.addAttribute("listRoles", listRoles);
-        return "user_form";
-    }
-
-/*    @PostMapping(value = "/users/edit/{id}")
-    public String editUser(@ModelAttribute User user,
-                           @RequestParam(value = "roless") Set<String> roles) {
-        user.setRoles(roleService.getSetRoles(roles));
-        userService.save(user);
-        return "user_form";
-    }*/
-
-    @PostMapping("/users/save")
-    public String saveUser(User user, Model model) {
-        userService.save(user);
-        return "redirect:/admin/users";
+        return "redirect:/admin";
     }
 
     @PostMapping(value = "/users/delete/{id}")
     public String deleteUser(@PathVariable("id") long id) {
         User user = userService.getById(id);
         userService.delete(user);
-        return "redirect:/admin/users";
+        return "redirect:/admin";
     }
-
 }

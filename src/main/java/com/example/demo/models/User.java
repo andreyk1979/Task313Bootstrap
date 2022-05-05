@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -43,8 +42,7 @@ public class User implements UserDetails {
         this.roles = roles;
         this.age = age;
     }
-
-
+    // конструктор используется для создания админа через postConstruct в class SecurityConfig
     public User(long id, String firstname, String lastname, int age, String email, String password, Set<Role> roles) {
         this.id = id;
         this.firstname = firstname;
@@ -144,9 +142,4 @@ public class User implements UserDetails {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
-    public String getFullName() {
-        return getFirstname() + " " + getLastname();
-    }
-
 }

@@ -51,8 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()//
-                .antMatchers("/user/**", "/login", "/webjars/**").hasAnyRole("ADMIN", "USER")
-                .antMatchers("/**").hasRole("ADMIN")
+                .antMatchers("/user/**", "/login", "/webjars/**").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers("/**").hasAuthority("ADMIN")
                 .and()
                 .formLogin().loginPage("/login").permitAll()
                 .successHandler(successUserHandler)
@@ -62,13 +62,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable();
     }
-/*
+/* для автоматического создания админа (включать только после создания таблицы через create)
     @PostConstruct
     private void postConstruct() {
-        User admin = new User("Andrey", "Kuimov", 43, "kuimow@mail.ru", "123456",
-                roleService.getAllRoles());
+        User admin = new User("Andrey", "Kuimov", 43, "kuimow@mail.ru", "123456", roleService.getAllRoles());
         userService.save(admin);
     }*/
-
-
 }

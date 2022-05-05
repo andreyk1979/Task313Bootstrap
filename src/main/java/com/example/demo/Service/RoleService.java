@@ -10,17 +10,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
 @Service
 public class RoleService {
-
-
     @Autowired
     RoleRepository roleRepository;
 
-
     public Set<Role> getAllRoles() {
-        return  new HashSet<>(roleRepository.findAll());
+        return new HashSet<>(roleRepository.findAll());
     }
 
     public void add(Role role) {
@@ -29,7 +25,5 @@ public class RoleService {
 
     public Set<Role> getSetRoles(Set<String> roles) {
         return roleRepository.getSetRoles(roles);
-
     }
-
 }

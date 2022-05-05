@@ -15,8 +15,6 @@ import java.util.List;
 
 @Service //задача этого сервиса - по имени пользователся предоставить самого юзера
 public class UserService implements UserDetailsService {
-/*    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;*/
 
     @Autowired
     UserRepository userRepository;
@@ -42,12 +40,6 @@ public class UserService implements UserDetailsService {
         return userRepository.getById(id);
     }
 
-/*
-    public User getUserByUserName(String email) {
-        return userRepository.getUserByEmail(email);
-    }*/
-
-
     public User getUserByEmail(String email) {
         return userRepository.getUserByEmail(email);
     }
@@ -59,5 +51,4 @@ public class UserService implements UserDetailsService {
         if (user == null) throw new UsernameNotFoundException("Нет такого " + emailAddress);
         return user;
     }
-
 }
