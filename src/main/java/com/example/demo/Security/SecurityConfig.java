@@ -1,8 +1,8 @@
 package com.example.demo.Security;
 
+
 import com.example.demo.Service.RoleService;
 import com.example.demo.Service.UserService;
-import com.example.demo.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,14 +21,20 @@ import javax.annotation.PostConstruct;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final UserService userService; // используется только для Создание админа в БД
+    private final RoleService roleService; // используется только для Создание админа в БД
+
+    private final SuccessUserHandler successUserHandler; // класс, в котором описана логика перенаправления пользователей по ролям
+
+    private final UserDetailsService userDetailsService;
+
     @Autowired
-    UserService userService;
-    @Autowired
-    RoleService roleService;
-    @Autowired
-    private SuccessUserHandler successUserHandler; // класс, в котором описана логика перенаправления пользователей по ролям
-    @Autowired
-    private UserDetailsService userDetailsService;
+    public SecurityConfig(UserService userService, RoleService roleService, SuccessUserHandler successUserHandler, UserDetailsService userDetailsService) {
+        this.userService = userService;
+        this.roleService = roleService;
+        this.successUserHandler = successUserHandler;
+        this.userDetailsService = userDetailsService;
+    }
 
     @Bean
     public static BCryptPasswordEncoder passwordEncoder() {

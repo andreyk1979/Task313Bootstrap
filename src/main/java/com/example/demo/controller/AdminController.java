@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.Service.RoleService;
+import com.example.demo.Service.RoleServiceImp;
 import com.example.demo.Service.UserService;
+import com.example.demo.Service.UserServiceImp;
 import com.example.demo.models.Role;
 import com.example.demo.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ public class AdminController {
     private final RoleService roleService;
 
     @Autowired
-    public AdminController(UserService userService, RoleService roleService) {
+    public AdminController(UserServiceImp userService, RoleServiceImp roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }

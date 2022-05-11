@@ -1,29 +1,15 @@
 package com.example.demo.Service;
 
 import com.example.demo.models.Role;
-import com.example.demo.repository.RoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-@Service
-public class RoleService {
-    @Autowired
-    RoleRepository roleRepository;
+public interface RoleService {
 
-    public Set<Role> getAllRoles() {
-        return new HashSet<>(roleRepository.findAll());
-    }
+    Set<Role> getAllRoles();
 
-    public void add(Role role) {
-        roleRepository.save(role);
-    }
+    void add(Role role);
 
-    public Set<Role> getSetRoles(Set<String> roles) {
-        return roleRepository.getSetRoles(roles);
-    }
+    Set<Role> getSetRoles(Set<String> roles);
+
 }
