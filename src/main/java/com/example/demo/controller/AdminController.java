@@ -8,13 +8,10 @@ import com.example.demo.models.Role;
 import com.example.demo.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -31,7 +28,7 @@ public class AdminController {
     }
 
     @GetMapping("")
-    public String listUser(ModelMap modelMap, @AuthenticationPrincipal User user) {
+    public String showAllUsers(ModelMap modelMap, @AuthenticationPrincipal User user) {
         modelMap.addAttribute("list", userService.getAllUsers());
         modelMap.addAttribute("roles", roleService.getAllRoles());
         modelMap.addAttribute("user", user);
@@ -39,14 +36,14 @@ public class AdminController {
     }
 
     @GetMapping("/user")
-    public String infoUser(@AuthenticationPrincipal User user, ModelMap model) {
+    public String showLoggedInUserInformaion(@AuthenticationPrincipal User user, ModelMap model) {
         model.addAttribute("user", user);
         model.addAttribute("roles", user.getRoles());
         return "/adminUserPage";
     }
 
     @PostMapping("/save")
-    public String processRegister(@ModelAttribute User user,
+    public String processUserRegistration(@ModelAttribute User user,
                                   @RequestParam(value = "roless",
                                           required = false,
                                           defaultValue = "USER") Set<String> roles) {

@@ -2,6 +2,7 @@ package com.example.demo.Security;
 
 
 import com.example.demo.Service.RoleService;
+import com.example.demo.Service.UserDetailsServiceImpl;
 import com.example.demo.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -26,10 +27,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final SuccessUserHandler successUserHandler; // класс, в котором описана логика перенаправления пользователей по ролям
 
-    private final UserDetailsService userDetailsService;
+    private final UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    public SecurityConfig(UserService userService, RoleService roleService, SuccessUserHandler successUserHandler, UserDetailsService userDetailsService) {
+    public SecurityConfig(UserService userService, RoleService roleService, SuccessUserHandler successUserHandler, UserDetailsServiceImpl userDetailsService) {
         this.userService = userService;
         this.roleService = roleService;
         this.successUserHandler = successUserHandler;
