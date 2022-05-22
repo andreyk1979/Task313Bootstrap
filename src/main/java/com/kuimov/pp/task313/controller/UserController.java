@@ -1,6 +1,6 @@
-package com.example.demo.controller;
+package com.kuimov.pp.task313.controller;
 
-import com.example.demo.models.User;
+import com.kuimov.pp.task313.models.User;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

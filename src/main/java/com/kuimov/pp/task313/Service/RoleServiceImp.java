@@ -1,7 +1,7 @@
-package com.example.demo.Service;
+package com.kuimov.pp.task313.Service;
 
-import com.example.demo.models.Role;
-import com.example.demo.repository.RoleRepository;
+import com.kuimov.pp.task313.models.Role;
+import com.kuimov.pp.task313.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

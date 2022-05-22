@@ -1,11 +1,11 @@
-package com.example.demo.controller;
+package com.kuimov.pp.task313.controller;
 
-import com.example.demo.Service.RoleService;
-import com.example.demo.Service.RoleServiceImp;
-import com.example.demo.Service.UserService;
-import com.example.demo.Service.UserServiceImp;
-import com.example.demo.models.Role;
-import com.example.demo.models.User;
+import com.kuimov.pp.task313.Service.RoleService;
+import com.kuimov.pp.task313.Service.RoleServiceImp;
+import com.kuimov.pp.task313.Service.UserService;
+import com.kuimov.pp.task313.Service.UserServiceImp;
+import com.kuimov.pp.task313.models.Role;
+import com.kuimov.pp.task313.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;

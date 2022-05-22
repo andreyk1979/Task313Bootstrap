@@ -1,4 +1,4 @@
-package com.example.demo.models;
+package com.kuimov.pp.task313.models;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;

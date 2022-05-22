@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.kuimov.pp.task313.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
