@@ -1,13 +1,12 @@
-package com.kuimov.pp.task313.Security;
+package com.kuimov.pp.task313.security;
 
 
-import com.kuimov.pp.task313.Service.RoleService;
-import com.kuimov.pp.task313.Service.UserDetailsServiceImpl;
-import com.kuimov.pp.task313.Service.UserService;
+import com.kuimov.pp.task313.service.RoleService;
+import com.kuimov.pp.task313.service.UserDetailsServiceImpl;
+import com.kuimov.pp.task313.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -37,14 +36,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public static BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
-        authProvider.setPasswordEncoder(passwordEncoder());
-        return authProvider;
     }
 
     @Override

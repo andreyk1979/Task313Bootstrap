@@ -1,9 +1,9 @@
 package com.kuimov.pp.task313.controller;
 
-import com.kuimov.pp.task313.Service.RoleService;
-import com.kuimov.pp.task313.Service.RoleServiceImp;
-import com.kuimov.pp.task313.Service.UserService;
-import com.kuimov.pp.task313.Service.UserServiceImp;
+import com.kuimov.pp.task313.service.RoleService;
+import com.kuimov.pp.task313.service.RoleServiceImp;
+import com.kuimov.pp.task313.service.UserService;
+import com.kuimov.pp.task313.service.UserServiceImp;
 import com.kuimov.pp.task313.models.Role;
 import com.kuimov.pp.task313.models.User;
 import org.springframework.beans.factory.annotation.Autowired;

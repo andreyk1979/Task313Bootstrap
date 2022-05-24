@@ -1,4 +1,4 @@
-package com.kuimov.pp.task313.Service;
+package com.kuimov.pp.task313.service;
 
 import com.kuimov.pp.task313.models.User;
 import com.kuimov.pp.task313.repository.UserRepository;
